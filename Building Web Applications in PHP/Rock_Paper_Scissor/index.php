@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <title>Arsh Sharma - Broken Rock Paper Scissors</title>
 <?php require_once "bootstrap.php"; ?>
