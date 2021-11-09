@@ -17,12 +17,12 @@ $failure = false;
 
 if (isset($_POST['email'], $_POST['password'])) {
     echo("<p>Handling POST data...</p>\n");
-    if ( strlen($_POST['who']) < 1 || strlen($_POST['pass']) < 1 ) {
+    if ( strlen($_POST['email']) < 1 || strlen($_POST['password']) < 1 ) {
         $failure = "Email and password are required";
-        error_log($now->format('c') . " Login Fail: $failure", 3,"errorLogLogin.log");
+        error_log($now->format('c') . " Login Fail: $failure \n", 3,"errorLogLogin.log");
     } else if (str_contains($_POST['email'], "@")) {
         $failure = "Email must have an at-sign (@)";
-        error_log($now->format('c') . " Login Fail: $failure", 3,"errorLogLogin.log");
+        error_log($now->format('c') . " Login Fail: $failure \n", 3,"errorLogLogin.log");
     } else {
         $check = hash('md5', $salt.$_POST['password']);
         if ($check === $stored_hash){
@@ -40,16 +40,16 @@ if (isset($_POST['email'], $_POST['password'])) {
 
             if ( $row === FALSE ) {
                 $failure = "Login Incorrect as details not in database";
-                error_log($now->format('c') . " Login Fail: $failure", 3,"errorLogLogin.log");
+                error_log($now->format('c') . " Login Fail: $failure \n", 3,"errorLogLogin.log");
             } else {
                 $failure = "Login Success";
-                error_log($now->format('c') . " Login Success: " . $_POST['email'], 3,"successLogLogin.");
+                error_log($now->format('c') . " Login Success: " . $_POST['email'] . "\n", 3,"successLogLogin.");
                 header("Location: autos.php?name=".urlencode($_POST['email']));
                 return;
             }
         } else {
             $failure = "Incorrect Password";
-            error_log($now->format('c') . " Login Fail: " . $_POST['email'] . " $check", 3,"errorLogLogin.log");
+            error_log($now->format('c') . " Login Fail: $failure for email " . $_POST['email'] . " and hash value - $check \n", 3,"errorLogLogin.log");
         }
     }
 
@@ -65,18 +65,19 @@ if ( $failure !== false ) {
     echo('<p style="color: red;">'.htmlentities($failure)."</p>\n");
 }
 ?>
-<form method="post">
-    <p>Email:
-        <label>
-            <input type="text" size="40" name="email">
-        </label>
-    </p>
-    <p>Password:
-        <label>
-            <input type="text" size="40" name="password">
-        </label>
-    </p>
-    <p><input type="submit" value="Login"/><a href="<?php echo($_SERVER['PHP_SELF']);?>">Refresh</a></p>
+<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+    <label>
+        Email: <input type="text" size="40" name="email">
+    </label>
+    <br>
+    <br>
+    <label>
+        Password: <input type="text" size="40" name="password">
+    </label>
+    <br>
+    <br>
+    <input type="submit" value="Login"/>&nbsp;&nbsp;
+    <a href="<?php echo ($_SERVER['PHP_SELF']);?>">Refresh</a>
 </form>
 <p>
     Check out this
