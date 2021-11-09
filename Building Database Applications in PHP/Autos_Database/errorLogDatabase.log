@@ -1,0 +1,13 @@
+2021-11-09T07:09:30+00:00 Database Not Connected: PDOException: could not find driver in C:\Users\arssharm\Documents\GitHub_Douglas\Web-Applications-for-Everybody---Coursera\Building Database Applications in PHP\Autos_Database\MySQLConnection.php:10
+Stack trace:
+#0 C:\Users\arssharm\Documents\GitHub_Douglas\Web-Applications-for-Everybody---Coursera\Building Database Applications in PHP\Autos_Database\MySQLConnection.php(10): PDO->__construct('mysql:host=loca...', 'root', 'root')
+#1 C:\Users\arssharm\Documents\GitHub_Douglas\Web-Applications-for-Everybody---Coursera\Building Database Applications in PHP\Autos_Database\login.php(5): MySQLConnection->__construct()
+#2 {main}2021-11-09T07:10:18+00:00 Database Not Connected: PDOException: could not find driver in C:\Users\arssharm\Documents\GitHub_Douglas\Web-Applications-for-Everybody---Coursera\Building Database Applications in PHP\Autos_Database\MySQLConnection.php:10
+Stack trace:
+#0 C:\Users\arssharm\Documents\GitHub_Douglas\Web-Applications-for-Everybody---Coursera\Building Database Applications in PHP\Autos_Database\MySQLConnection.php(10): PDO->__construct('mysql:host=loca...', 'root', 'root')
+#1 C:\Users\arssharm\Documents\GitHub_Douglas\Web-Applications-for-Everybody---Coursera\Building Database Applications in PHP\Autos_Database\login.php(5): MySQLConnection->__construct()
+#2 {main}2021-11-09T07:10:36+00:00 Database Not Connected: PDOException: could not find driver in C:\Users\arssharm\Documents\GitHub_Douglas\Web-Applications-for-Everybody---Coursera\Building Database Applications in PHP\Autos_Database\MySQLConnection.php:10
+Stack trace:
+#0 C:\Users\arssharm\Documents\GitHub_Douglas\Web-Applications-for-Everybody---Coursera\Building Database Applications in PHP\Autos_Database\MySQLConnection.php(10): PDO->__construct('mysql:host=loca...', 'root', 'root')
+#1 C:\Users\arssharm\Documents\GitHub_Douglas\Web-Applications-for-Everybody---Coursera\Building Database Applications in PHP\Autos_Database\login.php(5): MySQLConnection->__construct()
+#2 {main}
