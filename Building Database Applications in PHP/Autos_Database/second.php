@@ -2,7 +2,7 @@
 $pdo = new mySQLConnection('mysql:host=localhost;port=8889;dbname=misc',
     'fred', 'zap');
 $stmt = $pdo->query("SELECT name, email, password FROM users");
-$rows = $stmt->fetchAll(mySQLConnection::FETCH_ASSOC);
+$rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 echo '<table border="1">'."\n";
 foreach ( $rows as $row ) {
     echo "<tr><td>";

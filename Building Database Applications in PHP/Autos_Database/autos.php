@@ -63,10 +63,6 @@ if(isset($_GET['email'])){
         error_log($now->format('c') . " Error : $failure \n", 3,"errorLogAutos.log");
     }
 
-
-
-
-
 } else {
     $failure = "Name parameter missing";
     error_log($now->format('c') . " Unable to start Autos Page due to $failure \n", 3, "errorLogAutos.log");
@@ -110,7 +106,16 @@ if(isset($_GET['email'])){
     <p>
         <?php
             if(!empty($databaseStatus)){
-                // TODO - Show all data from Database in Unordered List
+                echo "<h3>Automobiles</h3>";
+                $stmt = $mysqlObj->getPDO()->query("SELECT make, year, mileage FROM autos");
+                $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                echo "<ul>";
+                foreach ( $rows as $row ) {
+                    echo "<li>";
+                    echo("$row['make']  $row['year']  $row['mileage']");
+                    echo("</li>");
+                }
+                echo "</table>\n";
             }
         ?>
     </p>
