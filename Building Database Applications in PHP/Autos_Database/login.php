@@ -15,16 +15,16 @@ $stored_hash = '218140990315bb39d948a523d61549b4';  // Pw is meow123
 
 $failure = false;
 
-if (isset($_POST['email'], $_POST['password'])) {
+if (isset($_POST['who'], $_POST['pass'])) {
     echo("<p>Handling POST data...</p>\n");
-    if ( strlen($_POST['email']) < 1 || strlen($_POST['password']) < 1 ) {
+    if ( strlen($_POST['who']) < 1 || strlen($_POST['pass']) < 1 ) {
         $failure = "Email and password are required";
         error_log($now->format('c') . " Login Fail: $failure \n", 3,"errorLogLogin.log");
-    } else if (!str_contains($_POST['email'], "@")) {
+    } else if (!str_contains($_POST['who'], "@")) {
         $failure = "Email must have an at-sign (@)";
         error_log($now->format('c') . " Login Fail: $failure \n", 3,"errorLogLogin.log");
     } else {
-        $check = hash('md5', $salt.$_POST['password']);
+        $check = hash('md5', $salt.$_POST['pass']);
         if ($check === $stored_hash){
             $sql = "SELECT name FROM users WHERE email = :em AND password = :pw";
 
@@ -32,8 +32,8 @@ if (isset($_POST['email'], $_POST['password'])) {
 
             $stmt = $mysqlObj->getPDO()->prepare($sql);
             $stmt->execute(array(
-                ':em' => $_POST['email'],
-                ':pw' => $_POST['password']));
+                ':em' => $_POST['who'],
+                ':pw' => $_POST['pass']));
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
             var_dump($row);
@@ -44,18 +44,23 @@ if (isset($_POST['email'], $_POST['password'])) {
             } else {
                 $failure = "Login Success";
                 error_log($now->format('c') . " Login Success: " . $_POST['email'] . "\n", 3,"successLogLogin.");
-                header("Location: autos.php?email=".urlencode($_POST['email']));
+                header("Location: autos.php?email=".urlencode($_POST['who']));
                 return;
             }
         } else {
             $failure = "Incorrect Password";
-            error_log($now->format('c') . " Login Fail: $failure for email " . $_POST['email'] . " and hash value - $check \n", 3,"errorLogLogin.log");
+            error_log($now->format('c') . " Login Fail: $failure for email " . $_POST['who'] . " and hash value - $check \n", 3,"errorLogLogin.log");
         }
     }
 
 
 }
 ?>
+<html lang="en">
+<head>
+    <title>Arsh Sharma Autos Login Page</title>
+</head>
+<body>
 <p>Please Login</p>
 <?php
 // Note triple not equals and think how badly double
@@ -67,18 +72,21 @@ if ( $failure !== false ) {
 ?>
 <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
     <label>
-        Email: <input type="text" size="40" name="email">
+        Email: <input type="text" size="40" name="who">
     </label>
     <br>
     <br>
     <label>
-        Password: <input type="text" size="40" name="password">
+        Password: <input type="text" size="40" name="pass">
     </label>
     <br>
     <br>
-    <input type="submit" value="Login"/>&nbsp;&nbsp;
+    <input type="submit" value="Log In"/>&nbsp;&nbsp;
     <a href="<?php echo ($_SERVER['PHP_SELF']);?>">Refresh</a>
 </form>
 <p>
     Check out this
     <a href="http://xkcd.com/327/" target="_blank">XKCD comic that is relevant</a>.
+</p>
+</body>
+</html>
