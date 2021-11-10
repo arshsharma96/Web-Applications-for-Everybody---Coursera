@@ -1,1 +1,7 @@
 2021-11-09T07:49:59+00:00 Login Fail: Incorrect Password for email asdb and hash value - a560ef471299b183542ca661fab3120b 
+2021-11-10T18:31:20+01:00 Login Fail: Email and password are required 
+2021-11-10T18:31:30+01:00 Login Fail: Email must have an at-sign (@) 
+2021-11-10T18:36:35+01:00 Login Fail: Email must have an at-sign (@) 
+2021-11-10T18:36:55+01:00 Login Fail: Login Incorrect as details not in database 
+2021-11-10T18:37:23+01:00 Login Fail: Incorrect Password for email csev@umich.edu and hash value - ba71f8e7f3b18d6bcd642a90e641b85a 
+2021-11-10T19:09:42+01:00 Login Fail: Incorrect Password for email csev@umich.edu and hash value - eddf02d53d5f31906019589a656104ff 

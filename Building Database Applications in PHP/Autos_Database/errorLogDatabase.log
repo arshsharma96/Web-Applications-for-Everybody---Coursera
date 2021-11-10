@@ -62,4 +62,51 @@ Stack trace:
 Stack trace:
 #0 C:\Users\arssharm\Documents\GitHub_Douglas\Web-Applications-for-Everybody---Coursera\Building Database Applications in PHP\Autos_Database\MySQLConnection.php(10): PDO->__construct('mysql:host=loca...', 'root', 'root')
 #1 C:\Users\arssharm\Documents\GitHub_Douglas\Web-Applications-for-Everybody---Coursera\Building Database Applications in PHP\Autos_Database\autos.php(6): MySQLConnection->__construct()
-#2 {main}
+#2 {main}2021-11-10T18:02:57+01:00 Database Not Connected: PDOException: SQLSTATE[HY000] [2002] No connection could be made because the target machine actively refused it in D:\GitHub Douglas\Web-Applications-for-Everybody---Coursera\Building Database Applications in PHP\Autos_Database\MySQLConnection.php:10
+Stack trace:
+#0 D:\GitHub Douglas\Web-Applications-for-Everybody---Coursera\Building Database Applications in PHP\Autos_Database\MySQLConnection.php(10): PDO->__construct('mysql:host=loca...', 'root', 'root')
+#1 D:\GitHub Douglas\Web-Applications-for-Everybody---Coursera\Building Database Applications in PHP\Autos_Database\login.php(5): MySQLConnection->__construct()
+#2 {main}2021-11-10T18:30:39+01:00 Database Not Connected: PDOException: SQLSTATE[HY000] [1044] Access denied for user 'fred'@'localhost' to database 'roster' in D:\GitHub Douglas\Web-Applications-for-Everybody---Coursera\Building Database Applications in PHP\Autos_Database\MySQLConnection.php:10
+Stack trace:
+#0 D:\GitHub Douglas\Web-Applications-for-Everybody---Coursera\Building Database Applications in PHP\Autos_Database\MySQLConnection.php(10): PDO->__construct('mysql:host=loca...', 'fred', 'zap')
+#1 D:\GitHub Douglas\Web-Applications-for-Everybody---Coursera\Building Database Applications in PHP\Autos_Database\login.php(5): MySQLConnection->__construct()
+#2 {main}2021-11-10T19:32:50+01:00 Error : PDOException: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'misc.autos' doesn't exist in D:\GitHub Douglas\Web-Applications-for-Everybody---Coursera\Building Database Applications in PHP\Autos_Database\autos.php:59
+Stack trace:
+#0 D:\GitHub Douglas\Web-Applications-for-Everybody---Coursera\Building Database Applications in PHP\Autos_Database\autos.php(59): PDOStatement->execute(Array)
+#1 {main}2021-11-10T19:33:48+01:00 Error : PDOException: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'misc.autos' doesn't exist in D:\GitHub Douglas\Web-Applications-for-Everybody---Coursera\Building Database Applications in PHP\Autos_Database\autos.php:31
+Stack trace:
+#0 D:\GitHub Douglas\Web-Applications-for-Everybody---Coursera\Building Database Applications in PHP\Autos_Database\autos.php(31): PDOStatement->execute(Array)
+#1 {main}2021-11-10T19:33:53+01:00 Error : PDOException: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'misc.autos' doesn't exist in D:\GitHub Douglas\Web-Applications-for-Everybody---Coursera\Building Database Applications in PHP\Autos_Database\autos.php:31
+Stack trace:
+#0 D:\GitHub Douglas\Web-Applications-for-Everybody---Coursera\Building Database Applications in PHP\Autos_Database\autos.php(31): PDOStatement->execute(Array)
+#1 {main}2021-11-10T19:34:52+01:00 Error : PDOException: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'misc.autos' doesn't exist in D:\GitHub Douglas\Web-Applications-for-Everybody---Coursera\Building Database Applications in PHP\Autos_Database\autos.php:32
+Stack trace:
+#0 D:\GitHub Douglas\Web-Applications-for-Everybody---Coursera\Building Database Applications in PHP\Autos_Database\autos.php(32): PDOStatement->execute(Array)
+#1 {main}2021-11-10T19:37:38+01:00 Error : PDOException: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'misc.autos' doesn't exist in D:\GitHub Douglas\Web-Applications-for-Everybody---Coursera\Building Database Applications in PHP\Autos_Database\autos.php:32
+Stack trace:
+#0 D:\GitHub Douglas\Web-Applications-for-Everybody---Coursera\Building Database Applications in PHP\Autos_Database\autos.php(32): PDOStatement->execute(Array)
+#1 {main}2021-11-10T19:39:40+01:00 Error : PDOException: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'misc.autos' doesn't exist in D:\GitHub Douglas\Web-Applications-for-Everybody---Coursera\Building Database Applications in PHP\Autos_Database\autos.php:34
+Stack trace:
+#0 D:\GitHub Douglas\Web-Applications-for-Everybody---Coursera\Building Database Applications in PHP\Autos_Database\autos.php(34): PDOStatement->execute(Array)
+#1 {main}2021-11-10T19:39:57+01:00 Error : PDOException: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'misc.autos' doesn't exist in D:\GitHub Douglas\Web-Applications-for-Everybody---Coursera\Building Database Applications in PHP\Autos_Database\autos.php:34
+Stack trace:
+#0 D:\GitHub Douglas\Web-Applications-for-Everybody---Coursera\Building Database Applications in PHP\Autos_Database\autos.php(34): PDOStatement->execute(Array)
+#1 {main}2021-11-10T19:40:14+01:00 Error : PDOException: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'misc.autos' doesn't exist in D:\GitHub Douglas\Web-Applications-for-Everybody---Coursera\Building Database Applications in PHP\Autos_Database\autos.php:34
+Stack trace:
+#0 D:\GitHub Douglas\Web-Applications-for-Everybody---Coursera\Building Database Applications in PHP\Autos_Database\autos.php(34): PDOStatement->execute(Array)
+#1 {main}2021-11-10T19:56:51+01:00 Error : PDOException: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'misc.autos' doesn't exist in D:\GitHub Douglas\Web-Applications-for-Everybody---Coursera\Building Database Applications in PHP\Autos_Database\autos.php:34
+Stack trace:
+#0 D:\GitHub Douglas\Web-Applications-for-Everybody---Coursera\Building Database Applications in PHP\Autos_Database\autos.php(34): PDOStatement->execute(Array)
+#1 {main}2021-11-10T19:56:57+01:00 Error : PDOException: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'misc.autos' doesn't exist in D:\GitHub Douglas\Web-Applications-for-Everybody---Coursera\Building Database Applications in PHP\Autos_Database\autos.php:34
+Stack trace:
+#0 D:\GitHub Douglas\Web-Applications-for-Everybody---Coursera\Building Database Applications in PHP\Autos_Database\autos.php(34): PDOStatement->execute(Array)
+#1 {main}2021-11-10T20:02:26+01:00 Error : PDOException: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'misc.autos' doesn't exist in D:\GitHub Douglas\Web-Applications-for-Everybody---Coursera\Building Database Applications in PHP\Autos_Database\autos.php:35
+Stack trace:
+#0 D:\GitHub Douglas\Web-Applications-for-Everybody---Coursera\Building Database Applications in PHP\Autos_Database\autos.php(35): PDOStatement->execute(Array)
+#1 {main}2021-11-10T20:03:23+01:00 Error : PDOException: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'misc.autos' doesn't exist in D:\GitHub Douglas\Web-Applications-for-Everybody---Coursera\Building Database Applications in PHP\Autos_Database\autos.php:35
+Stack trace:
+#0 D:\GitHub Douglas\Web-Applications-for-Everybody---Coursera\Building Database Applications in PHP\Autos_Database\autos.php(35): PDOStatement->execute(Array)
+#1 {main}2021-11-10T20:03:59+01:00 Error : PDOException: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'misc.autos' doesn't exist in D:\GitHub Douglas\Web-Applications-for-Everybody---Coursera\Building Database Applications in PHP\Autos_Database\autos.php:35
+Stack trace:
+#0 D:\GitHub Douglas\Web-Applications-for-Everybody---Coursera\Building Database Applications in PHP\Autos_Database\autos.php(35): PDOStatement->execute(Array)
+#1 {main}

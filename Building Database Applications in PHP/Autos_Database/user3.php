@@ -21,7 +21,7 @@ if ( isset($_POST['delete']) && isset($_POST['user_id']) ) {
 }
 
 $stmt = $pdo->query("SELECT name, email, password, user_id FROM users");
-$rows = $stmt->fetchAll(mySQLConnection::FETCH_ASSOC);
+$rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <html>
 <head></head><body><table border="1">

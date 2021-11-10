@@ -14,7 +14,7 @@ if ( isset($_POST['name']) && isset($_POST['email'])
 }
 
 $stmt = $pdo->query("SELECT name, email, password FROM users");
-$rows = $stmt->fetchAll(mySQLConnection::FETCH_ASSOC);
+$rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <html>
 <head></head><body><table border="1">

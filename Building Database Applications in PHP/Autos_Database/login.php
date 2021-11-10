@@ -10,8 +10,8 @@ $now = new DateTime('now');
 // p' OR '1' = '1
 
 // hashing values
-$salt = 'XyZzy12*_';
-$stored_hash = '1a52e17fa899cf40fb04cfc42e6352f1';  // Pw is meow123
+$salt = 'php';
+$stored_hash = '218140990315bb39d948a523d61549b4';  // Pw is meow123
 
 $failure = false;
 
@@ -20,7 +20,7 @@ if (isset($_POST['email'], $_POST['password'])) {
     if ( strlen($_POST['email']) < 1 || strlen($_POST['password']) < 1 ) {
         $failure = "Email and password are required";
         error_log($now->format('c') . " Login Fail: $failure \n", 3,"errorLogLogin.log");
-    } else if (str_contains($_POST['email'], "@")) {
+    } else if (!str_contains($_POST['email'], "@")) {
         $failure = "Email must have an at-sign (@)";
         error_log($now->format('c') . " Login Fail: $failure \n", 3,"errorLogLogin.log");
     } else {
@@ -44,7 +44,7 @@ if (isset($_POST['email'], $_POST['password'])) {
             } else {
                 $failure = "Login Success";
                 error_log($now->format('c') . " Login Success: " . $_POST['email'] . "\n", 3,"successLogLogin.");
-                header("Location: autos.php?name=".urlencode($_POST['email']));
+                header("Location: autos.php?email=".urlencode($_POST['email']));
                 return;
             }
         } else {
