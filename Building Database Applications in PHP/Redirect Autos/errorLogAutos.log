@@ -105,3 +105,7 @@
 2021-11-11T09:28:38+01:00 Error : Make is required 
 2021-11-11T09:31:00+01:00 Error : Make is required 
 2021-11-11T09:31:01+01:00 Error : Mileage and year must be numeric 
+2021-11-11T10:43:50+00:00 Unable to start Autos Page due to Not logged in 
+2021-11-11T10:43:53+00:00 Unable to start Autos Page due to Name parameter missing 
+2021-11-11T10:44:20+00:00 Unable to start Autos Page due to Not logged in 
+2021-11-11T10:44:23+00:00 Unable to start Autos Page due to Not logged in 

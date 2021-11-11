@@ -245,4 +245,20 @@ Stack trace:
 Stack trace:
 #0 C:\Users\arssharm\Documents\GitHub_Douglas\Web-Applications-for-Everybody---Coursera\Building Database Applications in PHP\Redirect Autos\MySQLConnection.php(10): PDO->__construct('mysql:host=loca...', 'fred', 'zap')
 #1 C:\Users\arssharm\Documents\GitHub_Douglas\Web-Applications-for-Everybody---Coursera\Building Database Applications in PHP\Redirect Autos\autos.php(6): MySQLConnection->__construct()
+#2 {main}2021-11-11T10:43:50+00:00 Database Not Connected: PDOException: could not find driver in C:\Users\arssharm\Documents\GitHub_Douglas\Web-Applications-for-Everybody---Coursera\Building Database Applications in PHP\Redirect Autos\MySQLConnection.php:10
+Stack trace:
+#0 C:\Users\arssharm\Documents\GitHub_Douglas\Web-Applications-for-Everybody---Coursera\Building Database Applications in PHP\Redirect Autos\MySQLConnection.php(10): PDO->__construct('mysql:host=loca...', 'fred', 'zap')
+#1 C:\Users\arssharm\Documents\GitHub_Douglas\Web-Applications-for-Everybody---Coursera\Building Database Applications in PHP\Redirect Autos\view.php(6): MySQLConnection->__construct()
+#2 {main}2021-11-11T10:43:53+00:00 Database Not Connected: PDOException: could not find driver in C:\Users\arssharm\Documents\GitHub_Douglas\Web-Applications-for-Everybody---Coursera\Building Database Applications in PHP\Redirect Autos\MySQLConnection.php:10
+Stack trace:
+#0 C:\Users\arssharm\Documents\GitHub_Douglas\Web-Applications-for-Everybody---Coursera\Building Database Applications in PHP\Redirect Autos\MySQLConnection.php(10): PDO->__construct('mysql:host=loca...', 'fred', 'zap')
+#1 C:\Users\arssharm\Documents\GitHub_Douglas\Web-Applications-for-Everybody---Coursera\Building Database Applications in PHP\Redirect Autos\add.php(8): MySQLConnection->__construct()
+#2 {main}2021-11-11T10:44:20+00:00 Database Not Connected: PDOException: could not find driver in C:\Users\arssharm\Documents\GitHub_Douglas\Web-Applications-for-Everybody---Coursera\Building Database Applications in PHP\Redirect Autos\MySQLConnection.php:10
+Stack trace:
+#0 C:\Users\arssharm\Documents\GitHub_Douglas\Web-Applications-for-Everybody---Coursera\Building Database Applications in PHP\Redirect Autos\MySQLConnection.php(10): PDO->__construct('mysql:host=loca...', 'fred', 'zap')
+#1 C:\Users\arssharm\Documents\GitHub_Douglas\Web-Applications-for-Everybody---Coursera\Building Database Applications in PHP\Redirect Autos\view.php(6): MySQLConnection->__construct()
+#2 {main}2021-11-11T10:44:23+00:00 Database Not Connected: PDOException: could not find driver in C:\Users\arssharm\Documents\GitHub_Douglas\Web-Applications-for-Everybody---Coursera\Building Database Applications in PHP\Redirect Autos\MySQLConnection.php:10
+Stack trace:
+#0 C:\Users\arssharm\Documents\GitHub_Douglas\Web-Applications-for-Everybody---Coursera\Building Database Applications in PHP\Redirect Autos\MySQLConnection.php(10): PDO->__construct('mysql:host=loca...', 'fred', 'zap')
+#1 C:\Users\arssharm\Documents\GitHub_Douglas\Web-Applications-for-Everybody---Coursera\Building Database Applications in PHP\Redirect Autos\add.php(8): MySQLConnection->__construct()
 #2 {main}
