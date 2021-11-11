@@ -21,20 +21,30 @@ if (isset($_POST['add'])){
     $email = $_POST['email'];
     if (isset($_POST['make'], $_POST['year'], $_POST['mileage'])){
         if (strlen($_POST['make']) < 1){
-            $failure = "The make does not have any characters";
+            $failure = "Make is required";
             error_log($now->format('c') . " Error : $failure \n", 3,"errorLogAutos.log");
-            $databaseStatus = "Record not inserted due to $failure";
-            header("Location: autos.php?email=".urlencode($email)."&status=".urlencode($databaseStatus));
+            //$databaseStatus = "$failure";
+            header("Location: autos.php?email=".urlencode($email)."&status=".urlencode($failure));
             return;
-        } else {
+        }
+
+        if((!is_numeric($_POST['year'])) || (!is_numeric($_POST['mileage']))){
+            $failure = "Mileage and year must be numeric";
+            error_log($now->format('c') . " Error : $failure \n", 3,"errorLogAutos.log");
+            //$databaseStatus = "$failure";
+            header("Location: autos.php?email=".urlencode($email)."&status=".urlencode($failure));
+            return;
+        }
+        else {
             try{
                 $sql = "INSERT INTO autos (make, year, mileage) VALUES (:mk, :yr, :mi)";
                 $stmt = $mysqlObj->getPDO()->prepare($sql);
                 $stmt->execute(array(
-                    ':mk' => $_POST['make'],
-                    ':yr' => $_POST['year'],
-                    ':mi' => $_POST['mileage']
+                    ':mk' => htmlentities($_POST['make']),
+                    ':yr' => htmlentities($_POST['year']),
+                    ':mi' => htmlentities($_POST['mileage'])
                 ));
+                var_dump($stmt);
                 $databaseStatus = "Record Inserted";
                 error_log($now->format('c') . " Record Inserted :" . "\n", 3,"successLogDatabase.log");
                 header("Location: autos.php?email=".urlencode($email)."&status=".urlencode($databaseStatus));
@@ -59,19 +69,19 @@ if (isset($_POST['add'])){
 
 // validating if username is passed from previous page
 if(isset($_GET['email'])){
-    $sql = "SELECT name FROM users WHERE email = :em";
-    $stmt = $mysqlObj->getPDO()->prepare($sql);
-    $stmt->execute(array(
-            ':em' => $_GET['email']
-    ));
-    $row = $stmt->fetch(PDO::FETCH_ASSOC);
-
-    // validating if username present in the database
-    if ( $row === FALSE ) {
-        $failure = "Username not in database";
-        error_log($now->format('c') . " Unable to start Autos Page due to : $failure \n", 3,"errorLogAutos.log");
-        die("Name parameter missing");
-    }
+//    $sql = "SELECT email FROM users WHERE email = :em";
+//    $stmt = $mysqlObj->getPDO()->prepare($sql);
+//    $stmt->execute(array(
+//            ':em' => $_GET['email']
+//    ));
+//    $row = $stmt->fetch(PDO::FETCH_ASSOC);
+//
+//    // validating if username present in the database
+//    if ( $row === FALSE ) {
+//        $failure = "Username not in database";
+//        error_log($now->format('c') . " Unable to start Autos Page due to : $failure \n", 3,"errorLogAutos.log");
+//        die("Name parameter missing");
+//    }
 
     // logging start of autos page for a user
     $failure = "Autos Page started";
@@ -88,23 +98,23 @@ if(isset($_GET['email'])){
         <title>Autos Page</title>
     </head>
     <body>
-        <h1>Tracking Autos for <?php echo $_GET['email']; ?> </h1>
+        <h1>Tracking Autos for <?php echo htmlentities($_GET['email']); ?> </h1>
         <p>
             <?php echo $_GET['status']; ?>
         </p>
         <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-            <label for="Make">
-                Make: <input type="text" name="make">
+            <label for="make">
+                Make: <input type="text" name="make" required>
             </label>
             <br>
             <br>
-            <label for="Year">
-                Year: <input type="number" name="year">
+            <label for="year">
+                Year: <input type="number" name="year" required>
             </label>
             <br>
             <br>
-            <label for="Mileage">
-                Mileage: <input type="number" name="mileage">
+            <label for="mileage">
+                Mileage: <input type="number" name="mileage" required>
             </label>
             <label>
                 <input type="hidden" name="email" value="<?php echo $_GET['email'] ?>"
@@ -115,8 +125,6 @@ if(isset($_GET['email'])){
             <input type="submit" name="logout" value="Logout"/>&nbsp;
         </form>
     <p><h3>Automobiles</h3>
-        <p>
-
         <?php
             if(!empty($_GET['status'])){
                 $stmt = $mysqlObj->getPDO()->query("SELECT make, year, mileage FROM autos");
@@ -130,6 +138,5 @@ if(isset($_GET['email'])){
                 echo "</table>\n";
             }
         ?>
-    </p>
     </body>
 </html>

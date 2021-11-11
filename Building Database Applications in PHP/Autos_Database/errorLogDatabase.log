@@ -109,4 +109,16 @@ Stack trace:
 #1 {main}2021-11-10T20:03:59+01:00 Error : PDOException: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'misc.autos' doesn't exist in D:\GitHub Douglas\Web-Applications-for-Everybody---Coursera\Building Database Applications in PHP\Autos_Database\autos.php:35
 Stack trace:
 #0 D:\GitHub Douglas\Web-Applications-for-Everybody---Coursera\Building Database Applications in PHP\Autos_Database\autos.php(35): PDOStatement->execute(Array)
-#1 {main}
+#1 {main}2021-11-11T07:56:16+01:00 Database Not Connected: PDOException: SQLSTATE[HY000] [2002] No connection could be made because the target machine actively refused it in D:\Apps\XAMPP\htdocs\Autos_Database\MySQLConnection.php:10
+Stack trace:
+#0 D:\Apps\XAMPP\htdocs\Autos_Database\MySQLConnection.php(10): PDO->__construct('mysql:host=loca...', 'fred', 'zap')
+#1 D:\Apps\XAMPP\htdocs\Autos_Database\login.php(5): MySQLConnection->__construct()
+#2 {main}2021-11-11T07:56:21+01:00 Database Not Connected: PDOException: SQLSTATE[HY000] [2002] No connection could be made because the target machine actively refused it in D:\Apps\XAMPP\htdocs\Autos_Database\MySQLConnection.php:10
+Stack trace:
+#0 D:\Apps\XAMPP\htdocs\Autos_Database\MySQLConnection.php(10): PDO->__construct('mysql:host=loca...', 'fred', 'zap')
+#1 D:\Apps\XAMPP\htdocs\Autos_Database\login.php(5): MySQLConnection->__construct()
+#2 {main}2021-11-11T07:56:26+01:00 Database Not Connected: PDOException: SQLSTATE[HY000] [2002] No connection could be made because the target machine actively refused it in D:\Apps\XAMPP\htdocs\Autos_Database\MySQLConnection.php:10
+Stack trace:
+#0 D:\Apps\XAMPP\htdocs\Autos_Database\MySQLConnection.php(10): PDO->__construct('mysql:host=loca...', 'fred', 'zap')
+#1 D:\Apps\XAMPP\htdocs\Autos_Database\login.php(5): MySQLConnection->__construct()
+#2 {main}

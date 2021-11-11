@@ -10,12 +10,13 @@ $now = new DateTime('now');
 // p' OR '1' = '1
 
 // hashing values
-$salt = 'php';
+//$salt = 'php';
 $stored_hash = '218140990315bb39d948a523d61549b4';  // Pw is meow123
 
 $failure = false;
 
 if (isset($_POST['who'], $_POST['pass'])) {
+    var_dump($_POST['who']);
     echo("<p>Handling POST data...</p>\n");
     if ( strlen($_POST['who']) < 1 || strlen($_POST['pass']) < 1 ) {
         $failure = "Email and password are required";
@@ -24,29 +25,34 @@ if (isset($_POST['who'], $_POST['pass'])) {
         $failure = "Email must have an at-sign (@)";
         error_log($now->format('c') . " Login Fail: $failure \n", 3,"errorLogLogin.log");
     } else {
-        $check = hash('md5', $salt.$_POST['pass']);
+        $check = hash('md5', $_POST['pass']);
         if ($check === $stored_hash){
-            $sql = "SELECT name FROM users WHERE email = :em AND password = :pw";
 
-            echo "<p>$sql</p>\n";
+            header("Location: autos.php?email=".urlencode($_POST['who']));
+            return;
 
-            $stmt = $mysqlObj->getPDO()->prepare($sql);
-            $stmt->execute(array(
-                ':em' => $_POST['who'],
-                ':pw' => $_POST['pass']));
-            $row = $stmt->fetch(PDO::FETCH_ASSOC);
-
-            var_dump($row);
-
-            if ( $row === FALSE ) {
-                $failure = "Login Incorrect as details not in database";
-                error_log($now->format('c') . " Login Fail: $failure \n", 3,"errorLogLogin.log");
-            } else {
-                $failure = "Login Success";
-                error_log($now->format('c') . " Login Success: " . $_POST['email'] . "\n", 3,"successLogLogin.");
-                header("Location: autos.php?email=".urlencode($_POST['who']));
-                return;
-            }
+//            $sql = "SELECT email FROM users WHERE email = :em AND password = :pw";
+//
+//            echo "<p>$sql</p>\n";
+//
+//            $stmt = $mysqlObj->getPDO()->prepare($sql);
+//            $stmt->execute(array(
+//                ":em" => $_POST['who'],
+//                ":pw" => $_POST['pass']));
+//            var_dump($stmt);
+//            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+//
+//            var_dump($row);
+//
+//            if ( $row === FALSE ) {
+//                $failure = "Login Incorrect as details not in database";
+//                error_log($now->format('c') . " Login Fail: $failure \n", 3,"errorLogLogin.log");
+//            } else {
+//                $failure = "Login Success";
+//                error_log($now->format('c') . " Login Success: " . $_POST['email'] . "\n", 3,"successLogLogin.");
+//                header("Location: autos.php?email=".urlencode($_POST['who']));
+//                return;
+//            }
         } else {
             $failure = "Incorrect Password";
             error_log($now->format('c') . " Login Fail: $failure for email " . $_POST['who'] . " and hash value - $check \n", 3,"errorLogLogin.log");
