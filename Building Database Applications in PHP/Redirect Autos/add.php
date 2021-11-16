@@ -24,20 +24,24 @@ if (isset($_POST['add'])){
             $status = "Make is required";
             error_log($now->format('c') . " Error : $status \n", 3,"errorLogAutos.log");
             $_SESSION['error'] = $status;
+            header("Location: add.php");
+            return;
         }
         if((!is_numeric($_POST['year'])) || (!is_numeric($_POST['mileage']))){
             $status = "Mileage and year must be numeric";
             error_log($now->format('c') . " Error : $status \n", 3,"errorLogAutos.log");
             $_SESSION['error'] = $status;
+            header("Location: add.php");
+            return;
         }
         else {
             try{
                 $sql = "INSERT INTO autos (make, year, mileage) VALUES (:mk, :yr, :mi)";
                 $stmt = $mysqlObj->getPDO()->prepare($sql);
                 $stmt->execute(array(
-                    ':mk' => htmlentities($_POST['make']),
-                    ':yr' => htmlentities($_POST['year']),
-                    ':mi' => htmlentities($_POST['mileage'])
+                    ':mk' => $_POST['make'],
+                    ':yr' => $_POST['year'],
+                    ':mi' => $_POST['mileage'] 
                 ));
                 var_dump($stmt);
                 $status = "Record Inserted";
@@ -99,17 +103,17 @@ if ( isset($_SESSION['error']) ) {
 ?>
 <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
     <label for="make">
-        Make: <input type="text" name="make">
+        Make: <input type="text" name="make" required>
     </label>
     <br>
     <br>
     <label for="year">
-        Year: <input type="number" name="year">
+        Year: <input type="number" name="year" required>
     </label>
     <br>
     <br>
     <label for="mileage">
-        Mileage: <input type="number" name="mileage">
+        Mileage: <input type="number" name="mileage" required>
     </label>
     <br>
     <br>

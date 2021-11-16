@@ -2,6 +2,8 @@
 
 require_once "MySQLConnection.php";
 
+session_start();
+
 // creating the object
 $mysqlObj = new MySQLConnection();
 
@@ -40,7 +42,7 @@ if(isset($_SESSION['name'])){
 
     // logging start of autos page for a user
     $failure = "Autos Page started";
-    error_log($now->format('c') . " Autos page started for user : " . $_GET['email'] . "\n", 3,"successLogAutos.log");
+    error_log($now->format('c') . " Autos page started for user : " . $_SESSION['name'] . "\n", 3,"successLogAutos.log");
 } else {
     $failure = "Not logged in";
     error_log($now->format('c') . " Unable to start Autos Page due to $failure \n", 3, "errorLogAutos.log");
@@ -56,25 +58,27 @@ if(isset($_SESSION['name'])){
 <h1>Tracking Autos for <?php echo htmlentities($_SESSION['name']); ?> </h1>
 <?php
 if ( isset($_SESSION['success']) ) {
-    echo('<p style="color: green;">'.htmlentities($_SESSION['success'])."</p>\n");
+    echo('<p style="color: green;">'. ($_SESSION['success'])."</p>\n");
     unset($_SESSION['success']);
 }
 ?>
-<p><h3>Automobiles</h3>
+<p><h2>Automobiles</h2>
 <?php
     $stmt = $mysqlObj->getPDO()->query("SELECT make, year, mileage FROM autos");
     $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
     echo "<ul>";
     foreach ( $rows as $row ) {
         echo "<li>";
-        echo($row["make"] . " " . $row["year"] . " / " . $row["mileage"]);
+        echo(htmlentities($row["make"]) . " " . htmlentities($row["year"]) . " / " . htmlentities($row["mileage"]));
         echo("</li>");
     }
     echo "</ul>\n";
 ?>
 <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-    <input type="submit" name="add" value="Add New"/>&nbsp;&nbsp;&nbsp;
-    <input type="submit" name="logout" value="Logout"/>&nbsp;
+<!--    <input type="submit" name="add" value="Add New"/>&nbsp;&nbsp;&nbsp;-->
+<!--    <input type="submit" name="logout" value="Logout"/>&nbsp;-->
+    <a href="add.php">Add New</a>&nbsp; | &nbsp;
+    <a href="logout.php">Logout</a>
 </form>
 </body>
 </html>

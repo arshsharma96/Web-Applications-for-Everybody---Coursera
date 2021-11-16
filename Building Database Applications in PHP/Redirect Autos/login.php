@@ -16,14 +16,14 @@ $stored_hash = '218140990315bb39d948a523d61549b4';  // Pw is meow123
 
 $failure = "";
 
-if (isset($_POST['who'], $_POST['pass'])) {
+if (isset($_POST['email'], $_POST['pass'])) {
    // var_dump($_POST['who']);
     //echo("<p>Handling POST data...</p>\n");
-    if ( strlen($_POST['who']) < 1 || strlen($_POST['pass']) < 1 ) {
+    if ( strlen($_POST['email']) < 1 || strlen($_POST['pass']) < 1 ) {
         $failure = "Email and password are required";
         error_log($now->format('c') . " Login Fail: $failure \n", 3,"errorLogLogin.log");
         $_SESSION['error'] = $failure;
-    } else if (!str_contains($_POST['who'], "@")) {
+    } else if (!str_contains($_POST['email'], "@")) {
         $failure = "Email must have an at-sign (@)";
         error_log($now->format('c') . " Login Fail: $failure \n", 3,"errorLogLogin.log");
         $_SESSION['error'] = $failure;
@@ -32,7 +32,7 @@ if (isset($_POST['who'], $_POST['pass'])) {
         if ($check === $stored_hash){
 //            header("Location: autos.php?email=".urlencode($_POST['who']));
 //            return;
-            $_SESSION['name'] = $_POST['who'];
+            $_SESSION['name'] = $_POST['email'];
             header("Location: view.php");
             return;
 
@@ -62,7 +62,7 @@ if (isset($_POST['who'], $_POST['pass'])) {
         }
         else {
             $failure = "Incorrect Password";
-            error_log($now->format('c') . " Login Fail: $failure for email " . $_POST['who'] . " and hash value - $check \n", 3,"errorLogLogin.log");
+            error_log($now->format('c') . " Login Fail: $failure for email " . $_POST['email'] . " and hash value - $check \n", 3,"errorLogLogin.log");
             $_SESSION['error'] = $failure;
         }
     }
@@ -81,13 +81,13 @@ if (isset($_POST['who'], $_POST['pass'])) {
 // Note triple not equals and think how badly double
 // not equals would work here...
     if(isset($_SESSION['error'])){
-        echo('<p style="color: red;">'.htmlentities($_SESSION['error'])."</p>\n");
+        echo('<p style="color: red;">'. ($_SESSION['error']) ."</p>\n");
         unset($_SESSION['error']);
     }
 ?>
 <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
     <label>
-        Email: <input type="text" size="40" name="who" required>
+        Email: <input type="text" size="40" name="email" required>
     </label>
     <br>
     <br>
