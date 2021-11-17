@@ -9,44 +9,18 @@ $mysqlObj = new MySQLConnection();
 
 $now = new DateTime('now');
 
-$failure = false;
-$databaseStatus = false;
-
-// on pressing logout
-if (isset($_POST['logout'])){
-    header('Location: logout.php');
-    return;
-}
-
-if (isset($_POST['add'])){
-    header("Location: add.php");
-    return;
-}
+$status = "";
 
 
 // validating if username is passed from previous page
 if(isset($_SESSION['name'])){
-//    $sql = "SELECT email FROM users WHERE email = :em";
-//    $stmt = $mysqlObj->getPDO()->prepare($sql);
-//    $stmt->execute(array(
-//            ':em' => $_GET['email']
-//    ));
-//    $row = $stmt->fetch(PDO::FETCH_ASSOC);
-//
-//    // validating if username present in the database
-//    if ( $row === FALSE ) {
-//        $failure = "Username not in database";
-//        error_log($now->format('c') . " Unable to start Autos Page due to : $failure \n", 3,"errorLogAutos.log");
-//        die("Name parameter missing");
-//    }
-
     // logging start of autos page for a user
-    $failure = "Autos Page started";
+    $status = "Autos Page started";
     error_log($now->format('c') . " Autos page started for user : " . $_SESSION['name'] . "\n", 3,"successLogAutos.log");
 } else {
-    $failure = "Not logged in";
-    error_log($now->format('c') . " Unable to start Autos Page due to $failure \n", 3, "errorLogAutos.log");
-    die($failure);
+    $status = "ACCESS DENIED";
+    error_log($now->format('c') . " Unable to start Autos Page due to $status \n", 3, "errorLogAutos.log");
+    die($status);
 }
 ?>
 
@@ -57,27 +31,38 @@ if(isset($_SESSION['name'])){
 <body>
 <h1>Welcome to Automobiles Database</h1>
 <?php
-if ( isset($_SESSION['success']) ) {
+if (isset($_SESSION['success'])) {
     echo('<p style="color: green;">'. ($_SESSION['success'])."</p>\n");
     unset($_SESSION['success']);
 }
 ?>
 <p><h2>Automobiles</h2>
+<br>
+<br>
+
 <?php
-$stmt = $mysqlObj->getPDO()->query("SELECT make, year, mileage FROM autos");
+$stmt = $mysqlObj->getPDO()->query("SELECT autos_id, make, model, year, mileage FROM autos");
 $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
-echo "<ul>";
+// TODO if no data in table no rows to be printed
+// creating table
+echo "<table><tr><th>Make</th><th>Model</th><th>Year</th><th>Mileage</th><th>Action</th></tr>";
 foreach ( $rows as $row ) {
-    echo "<li>";
-    echo(htmlentities($row["make"]) . " " . htmlentities($row["year"]) . " / " . htmlentities($row["mileage"]));
-    echo("</li>");
+    echo "<tr>";
+    echo "<td>" . htmlentities($row['make']) . "</td>";
+    echo "<td>" . htmlentities($row['model']) . "</td>";
+    echo "<td>" . htmlentities($row['year']) . "</td>";
+    echo "<td>" . htmlentities($row['mileage']) . "</td>";
+    echo '<td> <a href="edit.php?autos_id='.$row['autos_id'].'">Edit</a> / ';
+    echo  '<a href="delete.php?autos_id='.$row['autos_id'].'">Delete</a></td>';
+    echo "</tr>";
 }
-echo "</ul>\n";
+echo "</table>";
 ?>
+
 <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-    <!--    <input type="submit" name="add" value="Add New"/>&nbsp;&nbsp;&nbsp;-->
-    <!--    <input type="submit" name="logout" value="Logout"/>&nbsp;-->
-    <a href="add.php">Add New</a>&nbsp; | &nbsp;
+    <a href="add.php">Add New Entry</a>
+    <br>
+    <br>
     <a href="logout.php">Logout</a>
 </form>
 </body>

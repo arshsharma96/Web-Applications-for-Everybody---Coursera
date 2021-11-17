@@ -9,76 +9,79 @@ $mysqlObj = new MySQLConnection();
 
 $now = new DateTime('now');
 
-$status = false;
+$status = "";
 
 // on pressing logout
 if (isset($_POST['cancel'])){
-    header('Location: view.php');
+    header('Location: index.php');
     return;
 }
 
 // on adding a record
 if (isset($_POST['add'])){
-    if (isset($_POST['make'], $_POST['year'], $_POST['mileage'])){
+    if (isset($_POST['make'], $_POST['model'], $_POST['year'], $_POST['mileage'])){
+
         if (strlen($_POST['make']) < 1){
-            $status = "Make is required";
+            $status = "All fields are required";
             error_log($now->format('c') . " Error : $status \n", 3,"errorLogAutos.log");
             $_SESSION['error'] = $status;
             header("Location: add.php");
             return;
         }
-        if((!is_numeric($_POST['year'])) || (!is_numeric($_POST['mileage']))){
-            $status = "Mileage and year must be numeric";
+
+        if(strlen($_POST['model']) < 1){
+            $status = "All fields are required";
             error_log($now->format('c') . " Error : $status \n", 3,"errorLogAutos.log");
             $_SESSION['error'] = $status;
             header("Location: add.php");
             return;
         }
-        else {
-            try{
-                $sql = "INSERT INTO autos (make, year, mileage) VALUES (:mk, :yr, :mi)";
-                $stmt = $mysqlObj->getPDO()->prepare($sql);
-                $stmt->execute(array(
-                    ':mk' => $_POST['make'],
-                    ':yr' => $_POST['year'],
-                    ':mi' => $_POST['mileage'] 
-                ));
-                var_dump($stmt);
-                $status = "Record Inserted";
-                error_log($now->format('c') . " Record Inserted :" . "\n", 3,"successLogDatabase.log");
-                $_SESSION['success'] = $status;
-                header("Location: view.php");
-                return;
-            } catch (Exception $e){
-                $status = "Record not inserted due to error";
-                error_log($now->format('c') . " Error : " . $e, 3, "errorLogDatabase.log");
-                $_SESSION['error'] = $status;
-            }
+
+        if((!is_numeric($_POST['year']))){
+            $status = "Year must be an integer";
+            error_log($now->format('c') . " Error : $status \n", 3,"errorLogAutos.log");
+            $_SESSION['error'] = $status;
+            header("Location: add.php");
+            return;
         }
-    } else {
-        $status = "All the fields must be filled";
+
+        if((!is_numeric($_POST['mileage']))){
+            $status = "Mileage must be an integer";
+            error_log($now->format('c') . " Error : $status \n", 3,"errorLogAutos.log");
+            $_SESSION['error'] = $status;
+            header("Location: add.php");
+            return;
+        }
+
+        try{
+            $sql = "INSERT INTO autos (make, model, year, mileage) VALUES (:mk, :md, :yr, :mi)";
+            $stmt = $mysqlObj->getPDO()->prepare($sql);
+            $stmt->execute(array(':mk' => $_POST['make'],
+                ':md' => $_POST['model'],
+                ':yr' => $_POST['year'],
+                ':mi' => $_POST['mileage']
+            ));
+            $status = "Record added";
+            error_log($now->format('c') . " Record Inserted :" . "\n", 3,"successLogDatabase.log");
+            $_SESSION['success'] = $status;
+            header("Location: index.php");
+            return;
+        } catch (Exception $e){
+            $status = "Record not inserted due to error";
+            error_log($now->format('c') . " Error : " . $e, 3, "errorLogDatabase.log");
+            $_SESSION['error'] = $status;
+        }
+
+    }
+    else {
+        $status = "All fields are required";
         error_log($now->format('c') . " Error : $status \n", 3,"errorLogAutos.log");
         $_SESSION['error'] = $status;
     }
 }
 
-
 // validating if username is passed from previous page
 if(isset($_SESSION['name'])){
-//    $sql = "SELECT email FROM users WHERE email = :em";
-//    $stmt = $mysqlObj->getPDO()->prepare($sql);
-//    $stmt->execute(array(
-//            ':em' => $_GET['email']
-//    ));
-//    $row = $stmt->fetch(PDO::FETCH_ASSOC);
-//
-//    // validating if username present in the database
-//    if ( $row === FALSE ) {
-//        $failure = "Username not in database";
-//        error_log($now->format('c') . " Unable to start Autos Page due to : $failure \n", 3,"errorLogAutos.log");
-//        die("Name parameter missing");
-//    }
-
     // logging start of autos page for a user
     $status = "Autos Add Page started";
     error_log($now->format('c') . " Autos page started for user : " . $_SESSION['name'] . "\n", 3,"successLogAutos.log");
@@ -104,6 +107,11 @@ if ( isset($_SESSION['error']) ) {
 <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
     <label for="make">
         Make: <input type="text" name="make" required>
+    </label>
+    <br>
+    <br>
+    <label>
+        Model: <input type="text" name="model" required>
     </label>
     <br>
     <br>
