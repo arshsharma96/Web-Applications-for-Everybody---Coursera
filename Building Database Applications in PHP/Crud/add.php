@@ -106,22 +106,22 @@ if ( isset($_SESSION['error']) ) {
 ?>
 <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
     <label for="make">
-        Make: <input type="text" name="make" required>
+        Make: <input type="text" name="make">
     </label>
     <br>
     <br>
     <label>
-        Model: <input type="text" name="model" required>
+        Model: <input type="text" name="model">
     </label>
     <br>
     <br>
     <label for="year">
-        Year: <input type="number" name="year" required>
+        Year: <input type="number" name="year">
     </label>
     <br>
     <br>
     <label for="mileage">
-        Mileage: <input type="number" name="mileage" required>
+        Mileage: <input type="number" name="mileage">
     </label>
     <br>
     <br>

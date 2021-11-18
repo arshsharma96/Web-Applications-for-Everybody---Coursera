@@ -4,28 +4,29 @@ session_start();
 
 $mysqlObj = new MySQLConnection();
 
-if (isset($_POST['delete'], $_POST['autos_id'])) {
-    $sql = "DELETE FROM autos WHERE user_id = :auto";
-    $stmt = $mysqlObj->getPDO()->prepare($sql);
-    $stmt->execute(array(':auto' => $_POST['user_id']));
-    $_SESSION['success'] = 'Record deleted';
-    header( 'Location: index.php' ) ;
-    return;
-}
+//// Guardian: Make sure that autos_id is present
+//if (!isset($_GET['id'])) {
+//    $_SESSION['error'] = "Missing user_id";
+//    header('Location: index.php');
+//    return;
+//}
 
-// Guardian: Make sure that autos_id is present
-if ( ! isset($_GET['autos_id']) ) {
-    $_SESSION['error'] = "Missing user_id";
+if (isset($_POST['delete'], $_POST['autos_id'])) {
+    $sql = "DELETE FROM autos WHERE autos_id = :auto";
+    $stmt = $mysqlObj->getPDO()->prepare($sql);
+    $stmt->execute(array(':auto' => $_POST['autos_id']));
+    $_SESSION['success'] = 'Record deleted';
     header('Location: index.php');
     return;
 }
 
-$stmt = $mysqlObj->getPDO()->prepare("SELECT make FROM autos where autos_id = :auto");
-$stmt->execute(array(":auto" => $_GET['autos_id']));
+
+$stmt = $mysqlObj->getPDO()->prepare("SELECT * FROM autos where autos_id = :auto");
+$stmt->execute(array(":auto" => $_GET['id']));
 $row = $stmt->fetch(PDO::FETCH_ASSOC);
-if ( $row === false ) {
+if ($row === false) {
     $_SESSION['error'] = 'Bad value for autos_id';
-    header( 'Location: index.php' ) ;
+    header('Location: index.php');
     return;
 }
 
